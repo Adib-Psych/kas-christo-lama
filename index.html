@@ -436,7 +436,7 @@ const ATURAN_MULAI="2026-09-15"; // BRI dibuka 15 Sep 2026; sebelum itu belum ad
 const noteOptional=t=>t.alokasi&&t.alokasi.length&&t.alokasi.every(a=>a.pos==="bank"||(a.pos==="pribadi"&&t.rek==="BCA"));
 const needsNote=t=>t.arah==="keluar"&&t.alokasi&&t.alokasi.length&&!(t.ket||"").trim()&&!noteOptional(t);
 // "Perlu diisi" = belum dipilah atau belum ada catatan. Masuk hanya untuk Adib.
-const isTodo=t=>{if(t.arah==="masuk")return isAdib()&&!t.dikunci&&!(t.ket||"").trim();return !(t.alokasi&&t.alokasi.length)||needsNote(t);};
+const isTodo=t=>{if(t.arah==="masuk")return !t.dikunci&&!(t.ket||"").trim();return !(t.alokasi&&t.alokasi.length)||needsNote(t);};
 function swapPart(t){ // bagian yang tertukar rekening (keluar saja)
   if(t.arah!=="keluar"||!t.alokasi||t.tanggal<ATURAN_MULAI)return 0;
   return t.alokasi.reduce((s,a)=>{const r=POS[a.pos]&&POS[a.pos].rek;return s+((r&&r!=="*"&&r!==t.rek)?a.jumlah:0);},0);
@@ -488,7 +488,7 @@ function calc(){
 function renderAll(){if(!store)return;renderHero();const c=calc();renderAcct(c);renderReport();renderSwap(c);renderFilters();renderList();renderRecap();}
 function renderHero(){
   $("todayLbl").textContent=dLong(todayISO());
-  const list=txs().filter(t=>t.arah==="keluar"||isAdib());
+  const list=txs().filter(t=>t.arah==="keluar"||isAdib()||!t.dikunci);
   const n=list.length;
   const none=list.filter(t=>t.arah==="masuk"?isTodo(t):!(t.alokasi&&t.alokasi.length)).length;
   const noNote=list.filter(needsNote).length;
@@ -496,7 +496,7 @@ function renderHero(){
   const big=$("hBig");
   $("heroLab").textContent=none?"Belum dipilah":noNote?"Belum ada catatan":"Status pilah";
   if(!n){big.textContent="–";$("hOf").textContent="Belum ada transaksi.";}
-  else if(none){big.innerHTML=none+"<small>dari "+n+" transaksi</small>";$("hOf").textContent=isAdib()?"Termasuk uang masuk yang belum kamu beri catatan.":"Ketuk satu per satu, pilih kantongnya, dan tulis untuk apa.";}
+  else if(none){big.innerHTML=none+"<small>dari "+n+" transaksi</small>";$("hOf").textContent=isAdib()?"Termasuk uang masuk yang belum punya catatan asal.":"Ketuk satu per satu: pilih kantongnya dan tulis untuk apa. Uang masuk yang bukan dari Adib: tulis asalnya.";}
   else if(noNote){big.innerHTML=noNote+"<small>tanpa catatan</small>";$("hOf").textContent="Kantong sudah dipilih. Tinggal tulis untuk apa.";}
   else{big.textContent="Rapi ✓";$("hOf").textContent="Semua transaksi sudah dipilah dan diberi catatan.";}
   const pill=$("hPill");pill.className="pill "+(none||noNote?"warn":"ok");pill.textContent=none||noNote?"Perlu diisi":"Lengkap";
@@ -588,7 +588,7 @@ function renderList(){
     let tags='<span class="tag t-rek">'+t.rek+'</span>';
     if(t.alokasi&&t.alokasi.length)t.alokasi.forEach(a=>tags+='<span class="tag t-'+a.pos+'"><i></i>'+POS[a.pos].lab+(t.alokasi.length>1?" "+rpk(a.jumlah):"")+'</span>');
     else if(!inn)tags+='<span class="tag t-none">Belum dipilah</span>';
-    else if(!(t.ket||"").trim())tags+='<span class="tag t-none">'+(isAdib()?"Beri catatan":"Menunggu Adib")+'</span>';
+    else if(!(t.ket||"").trim())tags+='<span class="tag t-none">'+(t.dikunci?"Dari Adib":"Asal belum dicatat")+'</span>';
     if(swapPart(t))tags+='<span class="tag t-swap">Tertukar</span>';
     if(needsNote(t))tags+='<span class="tag t-none">Belum ada catatan</span>';
     if(t.dikunci)tags+='<span class="tag t-lock">✓ Dicek Adib</span>';
@@ -618,7 +618,7 @@ function editor(t,isNew){
     box.appendChild(el("div","raw",(t.sumber==="mutasi"?"Mutasi "+t.rek+" · ":"Dicatat manual · ")+dLong(t.tanggal)+(t.jam?" "+t.jam:"")+"\n"+(t.uraian||"")+(t.biaya?" · biaya "+fmt.format(t.biaya):"")+(t.saldoBank!=null?" · saldo "+fmt.format(t.saldoBank):"")));
   }
   const rule=el("div","rule");
-  rule.innerHTML=inn?(isAdib()?"<b>Uang masuk.</b> Tulis asal/untuk apa uang ini, lalu kunci.":"<b>Uang masuk</b> dicatat oleh Adib. Kalau belum ada catatan dan kamu tahu asalnya, tulis di bawah."):
+  rule.innerHTML=inn?(isAdib()?"<b>Uang masuk.</b> Tulis asal/untuk apa uang ini, lalu kunci.":(t.dikunci?"<b>Uang masuk dari Adib</b>, sudah dicatat dan dikunci.":"<b>Uang masuk ini bukan dari rekening Adib.</b> Tulis dari mana asalnya.")):
     t.rek==="BRI"?"<b>BRI</b> dipakai untuk Rumah NGT, Bonsari, atau Kebun Wakaf.":"<b>BCA</b> dipakai untuk keperluan pribadi.";
   box.appendChild(rule);
   if(t.catatanAdib&&!isAdib()){const b=el("div","infobox");b.innerHTML="<b>Catatan Adib:</b> "+esc(t.catatanAdib);box.appendChild(b);}
@@ -677,8 +677,8 @@ function editor(t,isNew){
 
   // catatan
   const p0=draft.alokasi[0]&&POS[draft.alokasi[0].pos];
-  const lk=el("label","f");lk.textContent=inn?(isAdib()?"Asal / untuk apa uang ini":"Catatan (opsional)"):(t.rek==="BCA"&&draft.alokasi.length&&draft.alokasi.every(a=>a.pos==="pribadi")?"Untuk apa? (opsional untuk pribadi)":"Untuk apa? (wajib)");
-  const ta=el("textarea");ta.maxLength=300;ta.rows=2;ta.value=draft.ket;ta.placeholder=inn?"mis. uang bulanan Oktober · hasil jual kopi":(p0&&p0.ph)||"mis. upah sortasi 3 orang · token listrik · pulsa";ta.disabled=lockedForMe;
+  const lk=el("label","f");lk.textContent=lockedForMe?"Catatan":inn?(isAdib()?"Asal / untuk apa uang ini":"Dari mana uang ini? (wajib)"):(t.rek==="BCA"&&draft.alokasi.length&&draft.alokasi.every(a=>a.pos==="pribadi")?"Untuk apa? (opsional untuk pribadi)":"Untuk apa? (wajib)");
+  const ta=el("textarea");ta.maxLength=300;ta.rows=2;ta.value=draft.ket;ta.placeholder=inn?"mis. setor uang hasil jual kopi · pinjaman · uang pribadi":(p0&&p0.ph)||"mis. upah sortasi 3 orang · token listrik · pulsa";ta.disabled=lockedForMe;
   ta.oninput=()=>{draft.ket=ta.value;updateSave();};lk.appendChild(ta);box.appendChild(lk);
 
   // nota
@@ -703,7 +703,7 @@ function editor(t,isNew){
   // aksi
   const acts=el("div","acts");const save=el("button","btn",isNew?"Simpan transaksi":"Simpan");save.type="button";
   const cancel=el("button","btn ghost","Tutup");cancel.type="button";cancel.onclick=()=>{openId=null;draft=null;if(isNew){$("addCard").hidden=true;}renderList();};
-  acts.append(save,cancel);
+  acts.append(save,cancel);if(lockedForMe)save.hidden=true;
   if(!isNew&&t.sumber==="manual"&&(isAdib()||(t.oleh==="christo"&&!t.dikunci))){const del=el("button","btn danger small","Hapus");del.type="button";
     let armed=false;del.onclick=async()=>{if(!armed){armed=true;del.textContent="Ketuk lagi untuk hapus";setTimeout(()=>{armed=false;del.textContent="Hapus";},4000);return;}
       del.disabled=true;try{await write({op:"delete",col:"tx",id:t.id});openId=null;draft=null;snack("Transaksi dihapus");renderAll();}catch(e){msg.textContent=errText(e);msg.className="msg err";del.disabled=false;}};acts.appendChild(del);}
@@ -715,6 +715,7 @@ function editor(t,isNew){
     if(canPos&&!draft.alokasi.length)return inn?"Pilih kantongnya dulu.":"Pilih kantongnya dulu.";
     if(canPos&&sum!==T())return "Pembagian belum pas dengan "+rp(T())+".";
     if(!inn&&!draft.ket.trim()&&!noteOptional({rek:t.rek,alokasi:draft.alokasi}))return "Tulis untuk apa uang ini.";
+    if(inn&&!isAdib()&&!draft.ket.trim())return "Tulis dari mana uang ini.";
     if(draft.alokasi.some(a=>a.pos==="lain")&&!draft.ket.trim())return "Untuk 'Lainnya', jelaskan di catatan.";
     return "";}
   function updateSave(){const v=valid();msg.textContent=v&&v!=="Terkunci"?v:"";msg.className="msg hint";save.disabled=!!v;}
