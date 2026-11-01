@@ -248,6 +248,12 @@ details.set .in{padding:0 16px 16px;display:flex;flex-direction:column;gap:12px}
   <div class="lock" aria-hidden="true">₪</div>
   <h1 id="gateTitle">Memuat…</h1>
   <p class="hint" id="gateMsg" style="max-width:340px;margin:0 auto"></p>
+  <form id="gateForm" style="display:flex;flex-direction:column;gap:8px;max-width:340px;margin:8px auto 0;width:100%" hidden>
+    <label class="f" for="gateIn" style="text-align:left">Atau tempel link dari Adib di sini</label>
+    <input id="gateIn" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="https://adib-psych.github.io/kas-christo/…">
+    <button class="btn" type="submit">Buka</button>
+    <span class="msg err" id="gateErr"></span>
+  </form>
 </div>
 
 <div class="wrap" id="app" hidden>
@@ -797,8 +803,8 @@ async function uploadNota(file){const b=await shrink(file);if(b.size>6*1024*1024
   const j=await call({op:"upload",type:b.type||"image/jpeg",base64:b64});return j.id;}
 
 let snT=null;function snack(t){const s=$("snack");s.textContent=t;s.hidden=false;clearTimeout(snT);snT=setTimeout(()=>s.hidden=true,2600);}
-function gate(t,m){$("gate").hidden=false;$("app").hidden=true;$("gateTitle").textContent=t;$("gateMsg").textContent=m;}
-function logout(){key=null;try{localStorage.removeItem(KEY_STORE);}catch(_){}gate("Link sudah tidak berlaku","Minta link baru ke Adib lewat WhatsApp, lalu buka link itu di HP ini.");}
+function gate(t,m,ask){$("gate").hidden=false;$("app").hidden=true;$("gateTitle").textContent=t;$("gateMsg").textContent=m;$("gateForm").hidden=!ask;}
+function logout(){key=null;try{localStorage.removeItem(KEY_STORE);}catch(_){}gate("Link sudah tidak berlaku","Minta link baru ke Adib lewat WhatsApp, lalu buka link itu di HP ini.",true);}
 
 function start(){
   $("gate").hidden=true;$("app").hidden=false;
@@ -832,11 +838,16 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!$("viewer").hidden
 
 // ================================================================ boot
 try{key=localStorage.getItem(KEY_STORE);}catch(_){}
-const hk=(location.hash.match(/k=([A-Za-z0-9_-]{20,})/)||[])[1];
-if(hk){key=hk;try{history.replaceState(null,"",location.pathname+location.search);}catch(_){}}
+// kunci boleh datang lewat #k=… atau ?k=… (beberapa aplikasi chat membuang bagian setelah #)
+const keyFrom=s=>(String(s||"").match(/[#?&]k=([A-Za-z0-9_-]{20,})/)||String(s||"").match(/^\s*([A-Za-z0-9_-]{30,})\s*$/)||[])[1];
+const hk=keyFrom(location.hash)||keyFrom(location.search);
+if(hk){key=hk;try{history.replaceState(null,"",location.pathname);}catch(_){}}
 window.addEventListener("hashchange",()=>{if(/k=/.test(location.hash))location.reload();});
 if(key){gate("Memuat…","Mengambil data dari Google Sheet Adib.");login();}
-else gate("Buka lewat link dari Adib","Halaman ini hanya terbuka lewat link khusus yang dikirim Adib. Sekali dibuka, HP ini akan mengingatnya.");
+else gate("Buka lewat link dari Adib","Halaman ini hanya terbuka lewat link khusus yang dikirim Adib. Sekali dibuka, HP ini akan mengingatnya.",true);
+$("gateForm").addEventListener("submit",e=>{e.preventDefault();const k=keyFrom($("gateIn").value);
+  if(!k){$("gateErr").textContent="Link tidak dikenali. Salin seluruh link dari pesan Adib.";return;}
+  key=k;$("gateErr").textContent="";gate("Memuat…","Mengambil data dari Google Sheet Adib.");login();});
 })();
 </script>
 </body>
