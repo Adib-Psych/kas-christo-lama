@@ -18,7 +18,7 @@
   --accent:#2F6B4E; --accent-ink:#245A40; --accent-soft:#E2EFE6;
   --bonsari:#A8642A; --bonsari-soft:#F6E8DA; --kebun:#3E8657; --kebun-soft:#E1F0E5;
   --rumah:#2E7590; --rumah-soft:#DDEEF4; --pribadi:#8A5BA0; --pribadi-soft:#F0E6F5;
-  --pindah:#6B7280; --pindah-soft:#ECEDEF; --bank:#8A8F87; --bank-soft:#EEEFEC; --lain:#56657A; --lain-soft:#E6EAF0;
+  --adib:#4F5F86; --adib-soft:#E6EAF3; --pindah:#6B7280; --pindah-soft:#ECEDEF; --bank:#8A8F87; --bank-soft:#EEEFEC; --lain:#56657A; --lain-soft:#E6EAF0;
   --ok:#2E7A55; --ok-soft:#E1F1E8; --warn:#A5620E; --warn-soft:#FBEEDB; --bad:#B03A2E; --bad-soft:#F9E4E1;
   --f-ui:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
   --f-display:"Barlow Semi Condensed","Arial Narrow",system-ui,sans-serif;
@@ -33,7 +33,7 @@
   --accent:#7CC59C; --accent-ink:#9AD6B3; --accent-soft:#1E3328;
   --bonsari:#E0A16A; --bonsari-soft:#3A2A1C; --kebun:#7CC59C; --kebun-soft:#1E3328;
   --rumah:#6CB8D4; --rumah-soft:#173039; --pribadi:#C59BDB; --pribadi-soft:#33243D;
-  --pindah:#AAB0B9; --pindah-soft:#262B31; --bank:#A9AEA6; --bank-soft:#262A25; --lain:#A6B4C8; --lain-soft:#242B35;
+  --adib:#A3B2D6; --adib-soft:#252B3A; --pindah:#AAB0B9; --pindah-soft:#262B31; --bank:#A9AEA6; --bank-soft:#262A25; --lain:#A6B4C8; --lain-soft:#242B35;
   --ok:#7CC59C; --ok-soft:#183024; --warn:#E8B45A; --warn-soft:#3A2D17; --bad:#F0918A; --bad-soft:#3B1E1B;
   --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 28px -14px rgba(0,0,0,.6)}}
 :root[data-theme="dark"]{
@@ -43,7 +43,7 @@
   --accent:#7CC59C; --accent-ink:#9AD6B3; --accent-soft:#1E3328;
   --bonsari:#E0A16A; --bonsari-soft:#3A2A1C; --kebun:#7CC59C; --kebun-soft:#1E3328;
   --rumah:#6CB8D4; --rumah-soft:#173039; --pribadi:#C59BDB; --pribadi-soft:#33243D;
-  --pindah:#AAB0B9; --pindah-soft:#262B31; --bank:#A9AEA6; --bank-soft:#262A25; --lain:#A6B4C8; --lain-soft:#242B35;
+  --adib:#A3B2D6; --adib-soft:#252B3A; --pindah:#AAB0B9; --pindah-soft:#262B31; --bank:#A9AEA6; --bank-soft:#262A25; --lain:#A6B4C8; --lain-soft:#242B35;
   --ok:#7CC59C; --ok-soft:#183024; --warn:#E8B45A; --warn-soft:#3A2D17; --bad:#F0918A; --bad-soft:#3B1E1B;
   --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 28px -14px rgba(0,0,0,.6)}
 *{box-sizing:border-box}
@@ -120,7 +120,7 @@ header .sub{font-size:13px;color:var(--muted)}
 .tag i{width:7px;height:7px;border-radius:50%;background:currentColor;display:inline-block}
 .t-bonsari{background:var(--bonsari-soft);color:var(--bonsari)} .t-kebun{background:var(--kebun-soft);color:var(--kebun)}
 .t-rumah{background:var(--rumah-soft);color:var(--rumah)} .t-pribadi{background:var(--pribadi-soft);color:var(--pribadi)}
-.t-pindah{background:var(--pindah-soft);color:var(--pindah)} .t-bank{background:var(--bank-soft);color:var(--bank)} .t-lain{background:var(--lain-soft);color:var(--lain)}
+.t-adib{background:var(--adib-soft);color:var(--adib)} .t-pindah{background:var(--pindah-soft);color:var(--pindah)} .t-bank{background:var(--bank-soft);color:var(--bank)} .t-lain{background:var(--lain-soft);color:var(--lain)}
 .t-none{background:var(--warn-soft);color:var(--warn)} .t-swap{background:var(--bad-soft);color:var(--bad)} .t-lock{background:var(--ok-soft);color:var(--ok)}
 .t-rek{background:var(--soft);color:var(--ink);font-family:var(--f-num);letter-spacing:.04em}
 
@@ -310,7 +310,7 @@ details.set .in{padding:0 16px 16px;display:flex;flex-direction:column;gap:12px}
         <div class="bal" id="balBRI">–</div>
         <div class="rec hint" id="recBRI"></div>
         <div class="io" id="ioBRI"></div>
-        <div class="use">Untuk <b>Rumah NGT</b>, <b>Bonsari</b>, dan <b>Kebun Wakaf</b>, termasuk tarik tunai di ATM Ngantang.</div>
+        <div class="use">Untuk <b>Rumah NGT</b>, <b>Bonsari</b>, <b>Kebun Wakaf</b>, dan kebutuhan Adib saat di Ngantang, termasuk tarik tunai di ATM Ngantang.</div>
       </div>
       <div class="acct">
         <div class="bank"><b>BCA</b><span class="tag t-rek">Pribadi</span></div>
@@ -398,13 +398,14 @@ const POS={
   bonsari:{lab:"Bonsari",sub:"Upah pekerja & operasional",rek:"BRI",ph:"mis. upah sortasi 3 orang, 2 hari"},
   kebun:{lab:"Kebun Wakaf",sub:"Perawatan kebun kopi",rek:"BRI",ph:"mis. pupuk 2 sak, upah babat"},
   rumah:{lab:"Rumah NGT",sub:"Kebutuhan rumah Ngantang",rek:"BRI",ph:"mis. token listrik, gas, belanja dapur"},
+  adib:{lab:"Kebutuhan Adib",sub:"Keperluan Adib di Ngantang",rek:"BRI",ph:"mis. titipan belanja Adib, bensin Adib"},
   pribadi:{lab:"Pribadi",sub:"Uang bulanan Christo",rek:"BCA",ph:"mis. pulsa, makan di luar"},
   pindah:{lab:"Pindah rekening",sub:"BRI ⇄ BCA / DANA sendiri",rek:"*",ph:"mis. ganti uang BRI yang terpakai pribadi"},
   bank:{lab:"Biaya bank",sub:"Admin, ATM, SMS",rek:"*",ph:""},
   lain:{lab:"Lainnya",sub:"Tulis keterangannya",rek:"*",ph:"jelaskan untuk apa"}
 };
 const POTS=["bonsari","kebun","rumah","pribadi"];
-const PICK_OUT=["rumah","bonsari","kebun","pribadi","pindah","lain"];
+const PICK_OUT=["rumah","bonsari","kebun","adib","pribadi","pindah","lain"];
 const PICK_IN=["bonsari","kebun","rumah","pribadi","pindah","lain"];
 const COLOR=k=>"var(--"+k+")";
 const BLN=["Jan","Feb","Mar","Apr","Mei","Jun","Jul","Agu","Sep","Okt","Nov","Des"];
@@ -516,7 +517,7 @@ function renderAcct(c){
     $("io"+r).innerHTML=a.n?'<span>Masuk <b>'+rpk(a.inn)+'</b></span><span>Keluar <b>'+rpk(a.out)+'</b></span>'+(a.start?'<span>Saldo awal <b>'+rpk(a.start)+'</b></span>':''):"";
   }
 }
-const REP_KEYS=[["rumah","Rumah NGT",""],["bonsari","Bonsari","upah & operasional"],["kebun","Kebun Wakaf",""]];
+const REP_KEYS=[["rumah","Rumah NGT",""],["bonsari","Bonsari","upah & operasional"],["kebun","Kebun Wakaf",""],["adib","Kebutuhan Adib",""]];
 function renderReport(){
   const sel=$("repMonth"),cur=sel.value||"all";
   const months=[...new Set(txs().filter(t=>t.rek==="BRI").map(t=>mKey(t.tanggal)))].sort().reverse();
@@ -767,7 +768,7 @@ function openAdd(){
 // ================================================================ rekap
 function renderRecap(){
   const months=[...new Set(txs().map(t=>mKey(t.tanggal)))].sort();
-  const keys=["rumah","bonsari","kebun"];
+  const keys=["rumah","bonsari","kebun","adib"];
   const rows=months.map(m=>{const r={m,inBRI:0,un:0,etc:0,pribBRI:0,bca:0};keys.forEach(k=>r[k]=0);
     txs().filter(t=>mKey(t.tanggal)===m).forEach(t=>{
       if(t.rek==="BCA"){if(t.arah==="keluar")r.bca+=total(t);return;}
