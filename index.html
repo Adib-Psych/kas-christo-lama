@@ -14,7 +14,7 @@
    dan Kas Perawatan Emak (kartu, pilihan keperluan, riwayat berfilter, rekap, salin WA). Satu kolom, HP dulu. */
 :root{
   --bg:#F5F3EC; --surface:#FFFFFF; --ink:#1E2A23; --muted:#66706A; --line:#E2DED2; --soft:#EFECE2;
-  --hero:#203A2E; --on-hero:#F6F3EA; --on-hero-muted:#B9C9BD; --hero-trk:rgba(255,255,255,.14); --hero-chip:rgba(255,255,255,.10);
+  --hero:#24272B; --on-hero:#F6F4EF; --on-hero-muted:#B8BDC4; --hero-trk:rgba(255,255,255,.14); --hero-chip:rgba(255,255,255,.10);
   --accent:#2F6B4E; --accent-ink:#245A40; --accent-soft:#E2EFE6;
   --bonsari:#A8642A; --bonsari-soft:#F6E8DA; --kebun:#3E8657; --kebun-soft:#E1F0E5;
   --rumah:#2E7590; --rumah-soft:#DDEEF4; --pribadi:#8A5BA0; --pribadi-soft:#F0E6F5;
@@ -29,7 +29,7 @@
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   color-scheme:dark;
   --bg:#0F1612; --surface:#18221C; --ink:#E8EEE9; --muted:#9DAAA1; --line:#2A3830; --soft:#1F2B24;
-  --hero:#1A3226; --on-hero:#F2F6F2; --on-hero-muted:#A9C0B0;
+  --hero:#1F2226; --on-hero:#F2F3F4; --on-hero-muted:#A9AFB7;
   --accent:#7CC59C; --accent-ink:#9AD6B3; --accent-soft:#1E3328;
   --bonsari:#E0A16A; --bonsari-soft:#3A2A1C; --kebun:#7CC59C; --kebun-soft:#1E3328;
   --rumah:#6CB8D4; --rumah-soft:#173039; --pribadi:#C59BDB; --pribadi-soft:#33243D;
@@ -39,7 +39,7 @@
 :root[data-theme="dark"]{
   color-scheme:dark;
   --bg:#0F1612; --surface:#18221C; --ink:#E8EEE9; --muted:#9DAAA1; --line:#2A3830; --soft:#1F2B24;
-  --hero:#1A3226; --on-hero:#F2F6F2; --on-hero-muted:#A9C0B0;
+  --hero:#1F2226; --on-hero:#F2F3F4; --on-hero-muted:#A9AFB7;
   --accent:#7CC59C; --accent-ink:#9AD6B3; --accent-soft:#1E3328;
   --bonsari:#E0A16A; --bonsari-soft:#3A2A1C; --kebun:#7CC59C; --kebun-soft:#1E3328;
   --rumah:#6CB8D4; --rumah-soft:#173039; --pribadi:#C59BDB; --pribadi-soft:#33243D;
@@ -87,7 +87,7 @@ header .sub{font-size:13px;color:var(--muted)}
 
 /* ---------- hero ---------- */
 .hero{position:relative;overflow:hidden;border-radius:20px;background:var(--hero);color:var(--on-hero);padding:20px 18px 18px;display:flex;flex-direction:column;gap:14px;box-shadow:var(--shadow)}
-.hero::before{content:"";position:absolute;right:-40px;top:-40px;width:220px;height:220px;border-radius:50%;pointer-events:none;
+.hero::before{display:none;content:"";position:absolute;right:-40px;top:-40px;width:220px;height:220px;border-radius:50%;pointer-events:none;
   background:radial-gradient(circle at 50% 50%,transparent 38%,rgba(255,255,255,.06) 39%,rgba(255,255,255,.06) 41%,transparent 42%,transparent 54%,rgba(255,255,255,.05) 55%,rgba(255,255,255,.05) 57%,transparent 58%,transparent 70%,rgba(255,255,255,.04) 71%,rgba(255,255,255,.04) 73%,transparent 74%)}
 .hero>*{position:relative}
 .hero .top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
@@ -124,6 +124,21 @@ header .sub{font-size:13px;color:var(--muted)}
 .t-none{background:var(--warn-soft);color:var(--warn)} .t-swap{background:var(--bad-soft);color:var(--bad)} .t-lock{background:var(--ok-soft);color:var(--ok)}
 .t-rek{background:var(--soft);color:var(--ink);font-family:var(--f-num);letter-spacing:.04em}
 
+/* ---------- laporan ---------- */
+.acct .io{display:flex;justify-content:space-between;gap:6px;flex-wrap:wrap;font-size:12px;color:var(--muted)}
+.acct .io b{font:600 12.5px var(--f-num);color:var(--ink)}
+.acct .bal{font:700 26px/1.1 var(--f-display);font-variant-numeric:tabular-nums}
+.rep{display:flex;flex-direction:column;gap:12px}
+.rep .tot{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
+.rep .tot b{font:700 24px var(--f-display)}
+.rrow{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;font-size:14px}
+.rrow .nm{display:flex;align-items:center;gap:7px;font-weight:700}
+.rrow .nm i{width:10px;height:10px;border-radius:3px;background:var(--c)}
+.rrow .nm small{font-weight:500;color:var(--muted);font-size:12px}
+.rrow .bar{grid-column:1/-1;height:8px;border-radius:4px;background:var(--soft);overflow:hidden}
+.rrow .bar span{display:block;height:100%;background:var(--c);border-radius:4px}
+.rrow.minor{font-size:13px;color:var(--muted)}
+.rep .sub{border-top:1px dashed var(--line);padding-top:10px;display:flex;flex-direction:column;gap:8px}
 /* ---------- kantong ---------- */
 .pots{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .pot{padding:14px;display:flex;flex-direction:column;gap:8px;border-radius:var(--r);background:var(--surface);border:1px solid var(--line);position:relative;overflow:hidden;min-width:0}
@@ -286,31 +301,31 @@ details.set .in{padding:0 16px 16px;display:flex;flex-direction:column;gap:12px}
 
   <div class="notice" id="accessNote" hidden></div>
 
-  <!-- ATURAN REKENING -->
+  <!-- KANTONG PER BANK -->
   <section aria-labelledby="ruleT">
-    <div class="sec-head"><h2 id="ruleT">Aturan dua rekening</h2><span class="hint">Disepakati Adib &amp; Christo</span></div>
+    <div class="sec-head"><h2 id="ruleT">Kantong BRI &amp; BCA</h2><span class="hint">Saldo menurut mutasi bank</span></div>
     <div class="rules">
       <div class="acct">
         <div class="bank"><b>BRI</b><span class="tag t-rek">Ngantang</span></div>
-        <div class="use">Untuk <b>Bonsari</b>, <b>Kebun Wakaf</b>, dan <b>Rumah NGT</b>, termasuk tarik tunai di ATM Ngantang.</div>
-        <div class="dots"><span class="tag t-bonsari"><i></i>Bonsari</span><span class="tag t-kebun"><i></i>Kebun</span><span class="tag t-rumah"><i></i>Rumah</span></div>
         <div class="bal" id="balBRI">–</div>
         <div class="rec hint" id="recBRI"></div>
+        <div class="io" id="ioBRI"></div>
+        <div class="use">Untuk <b>Rumah NGT</b>, <b>Bonsari</b>, dan <b>Kebun Wakaf</b>, termasuk tarik tunai di ATM Ngantang.</div>
       </div>
       <div class="acct">
         <div class="bank"><b>BCA</b><span class="tag t-rek">Pribadi</span></div>
-        <div class="use">Untuk keperluan <b>pribadi Christo</b> dari uang bulanan.</div>
-        <div class="dots"><span class="tag t-pribadi"><i></i>Pribadi</span></div>
         <div class="bal" id="balBCA">–</div>
         <div class="rec hint" id="recBCA"></div>
+        <div class="io" id="ioBCA"></div>
+        <div class="use">Untuk keperluan <b>pribadi Christo</b> dari uang bulanan.</div>
       </div>
     </div>
   </section>
 
-  <!-- KANTONG -->
-  <section aria-labelledby="potT">
-    <div class="sec-head"><h2 id="potT">Sisa per kantong</h2><span class="hint" id="potSub">Masuk yang ditandai Adib − keluar yang dipilah</span></div>
-    <div class="pots" id="pots"></div>
+  <!-- LAPORAN BRI -->
+  <section aria-labelledby="repT">
+    <div class="sec-head"><h2 id="repT">Laporan pemakaian BRI</h2><select id="repMonth" aria-label="Periode laporan"></select></div>
+    <div class="card pad rep" id="rep"></div>
   </section>
 
   <section class="swap" id="swapCard" hidden aria-labelledby="swapT"></section>
@@ -334,7 +349,7 @@ details.set .in{padding:0 16px 16px;display:flex;flex-direction:column;gap:12px}
 
   <!-- REKAP -->
   <section aria-labelledby="recapT">
-    <div class="sec-head"><h2 id="recapT">Rekap per bulan</h2><span class="hint">Uang keluar per kantong</span></div>
+    <div class="sec-head"><h2 id="recapT">Rekap per bulan</h2><span class="hint">Pemakaian BRI per bulan</span></div>
     <div class="card">
       <div class="mbars" id="mbars"></div>
       <div class="legend" id="mLegend"></div>
@@ -359,7 +374,7 @@ details.set .in{padding:0 16px 16px;display:flex;flex-direction:column;gap:12px}
         <label class="f">Saldo awal BCA (Rp)<input class="money" id="sBCA" inputmode="numeric" placeholder="0"></label>
         <label class="f">Per tanggal<input type="date" id="sBCAtgl"></label>
       </div>
-      <span class="hint">Saldo awal BCA dihitung sebagai uang pribadi Christo. Saldo awal BRI 15 Sep 2026 = Rp 0 (rekening baru).</span>
+      <span class="hint">Saldo awal dipakai untuk mencocokkan saldo dengan bank. BRI dibuka 15 Sep 2026 (saldo awal Rp 0).</span>
       <button class="btn small ghost" type="button" id="saveCfg">Simpan saldo awal</button>
       <label class="f">Impor mutasi (JSON dari Claude)<textarea id="impTxt" rows="3" placeholder='{"transaksi":[...]}'></textarea></label>
       <div class="acts"><button class="btn small" type="button" id="impBtn">Impor</button><button class="btn small ghost" type="button" id="expBtn">Unduh cadangan (.json)</button></div>
@@ -389,7 +404,7 @@ const POS={
   lain:{lab:"Lainnya",sub:"Tulis keterangannya",rek:"*",ph:"jelaskan untuk apa"}
 };
 const POTS=["bonsari","kebun","rumah","pribadi"];
-const PICK_OUT=["bonsari","kebun","rumah","pribadi","pindah","lain"];
+const PICK_OUT=["rumah","bonsari","kebun","pribadi","pindah","lain"];
 const PICK_IN=["bonsari","kebun","rumah","pribadi","pindah","lain"];
 const COLOR=k=>"var(--"+k+")";
 const BLN=["Jan","Feb","Mar","Apr","Mei","Jun","Jul","Agu","Sep","Okt","Nov","Des"];
@@ -417,11 +432,13 @@ const txs=()=>Object.values((store&&store.tx)||{});
 const cfg=()=>((store&&store.config&&store.config.main)||{});
 const isAdib=()=>role==="adib";
 const canEdit=t=>isAdib()||(!t.dikunci);
-const needsNote=t=>t.arah==="keluar"&&t.alokasi&&t.alokasi.length&&!(t.ket||"").trim()&&!t.alokasi.every(a=>a.pos==="bank");
+const ATURAN_MULAI="2026-09-15"; // BRI dibuka 15 Sep 2026; sebelum itu belum ada aturan dua rekening
+const noteOptional=t=>t.alokasi&&t.alokasi.length&&t.alokasi.every(a=>a.pos==="bank"||(a.pos==="pribadi"&&t.rek==="BCA"));
+const needsNote=t=>t.arah==="keluar"&&t.alokasi&&t.alokasi.length&&!(t.ket||"").trim()&&!noteOptional(t);
 // "Perlu diisi" = belum dipilah atau belum ada catatan. Masuk hanya untuk Adib.
-const isTodo=t=>{if(t.arah==="masuk")return isAdib()?!(t.alokasi&&t.alokasi.length):false;return !(t.alokasi&&t.alokasi.length)||needsNote(t);};
+const isTodo=t=>{if(t.arah==="masuk")return isAdib()&&!t.dikunci&&!(t.ket||"").trim();return !(t.alokasi&&t.alokasi.length)||needsNote(t);};
 function swapPart(t){ // bagian yang tertukar rekening (keluar saja)
-  if(t.arah!=="keluar"||!t.alokasi)return 0;
+  if(t.arah!=="keluar"||!t.alokasi||t.tanggal<ATURAN_MULAI)return 0;
   return t.alokasi.reduce((s,a)=>{const r=POS[a.pos]&&POS[a.pos].rek;return s+((r&&r!=="*"&&r!==t.rek)?a.jumlah:0);},0);
 }
 
@@ -453,43 +470,33 @@ function suggestFor(t){const p=partyOf(t);if(!p)return null;
 
 // ================================================================ hitung
 function calc(){
-  const pot={};POTS.concat(["pindah","bank","lain"]).forEach(k=>pot[k]={in:0,out:0,inBRI:0,inBCA:0,outBRI:0,outBCA:0});
-  let unIn=0,unOut=0,swapBRI=0,swapBCA=0;const swapRows=[];
-  const sa=cfg().saldoAwal||{};
-  if(sa.BCA&&sa.BCA.jumlah){pot.pribadi.in+=sa.BCA.jumlah;pot.pribadi.inBCA+=sa.BCA.jumlah;}
-  for(const t of txs()){
-    const T=total(t);
-    if(!t.alokasi||!t.alokasi.length){if(t.arah==="masuk")unIn+=T;else unOut+=T;continue;}
-    for(const a of t.alokasi){const p=pot[a.pos];if(!p)continue;
-      if(t.arah==="masuk"){p.in+=a.jumlah;p["in"+t.rek]+=a.jumlah;}else{p.out+=a.jumlah;p["out"+t.rek]+=a.jumlah;}}
-    const sw=swapPart(t);if(sw){if(t.rek==="BRI")swapBRI+=sw;else swapBCA+=sw;swapRows.push(t);}
-  }
-  const acct={};
+  let swapBRI=0,swapBCA=0;const swapRows=[];
+  const sa=cfg().saldoAwal||{};const acct={};
+  for(const t of txs()){const sw=swapPart(t);if(sw){if(t.rek==="BRI")swapBRI+=sw;else swapBCA+=sw;swapRows.push(t);}}
   for(const r of ["BRI","BCA"]){
     const rows=txs().filter(t=>t.rek===r);
     const start=(sa[r]&&sa[r].jumlah)||0;
-    const est=rows.reduce((s,t)=>s+(t.arah==="masuk"?total(t):-total(t)),start);
+    const inn=rows.filter(t=>t.arah==="masuk").reduce((s,t)=>s+total(t),0),out=rows.filter(t=>t.arah==="keluar").reduce((s,t)=>s+total(t),0);
     const mut=rows.filter(t=>t.sumber==="mutasi"&&t.saldoBank!=null).sort((a,b)=>(a.tanggal+(a.jam||"")).localeCompare(b.tanggal+(b.jam||"")));
     const last=mut[mut.length-1];
     const viaMut=rows.filter(t=>t.sumber==="mutasi").reduce((s,t)=>s+(t.arah==="masuk"?total(t):-total(t)),start);
-    acct[r]={n:rows.length,est,last,ok:last?Math.abs(viaMut-last.saldoBank)<2:null,diff:last?viaMut-last.saldoBank:0};
+    const first=rows.map(t=>t.tanggal).sort()[0];
+    acct[r]={n:rows.length,start,inn,out,est:start+inn-out,last,first,ok:last?Math.abs(viaMut-last.saldoBank)<2:null,diff:last?viaMut-last.saldoBank:0};
   }
-  return {pot,unIn,unOut,swapBRI,swapBCA,swapRows,acct};
+  return {swapBRI,swapBCA,swapRows,acct};
 }
-
-// ================================================================ render
-function renderAll(){if(!store)return;renderHero();const c=calc();renderAcct(c);renderPots(c);renderSwap(c);renderFilters();renderList();renderRecap();}
+function renderAll(){if(!store)return;renderHero();const c=calc();renderAcct(c);renderReport();renderSwap(c);renderFilters();renderList();renderRecap();}
 function renderHero(){
   $("todayLbl").textContent=dLong(todayISO());
   const list=txs().filter(t=>t.arah==="keluar"||isAdib());
   const n=list.length;
-  const none=list.filter(t=>!(t.alokasi&&t.alokasi.length)).length;
+  const none=list.filter(t=>t.arah==="masuk"?isTodo(t):!(t.alokasi&&t.alokasi.length)).length;
   const noNote=list.filter(needsNote).length;
   const ok=n-none-noNote;
   const big=$("hBig");
   $("heroLab").textContent=none?"Belum dipilah":noNote?"Belum ada catatan":"Status pilah";
   if(!n){big.textContent="–";$("hOf").textContent="Belum ada transaksi.";}
-  else if(none){big.innerHTML=none+"<small>dari "+n+" transaksi</small>";$("hOf").textContent=isAdib()?"Termasuk transfer masuk yang perlu kamu tandai.":"Ketuk satu per satu, pilih kantongnya, dan tulis untuk apa.";}
+  else if(none){big.innerHTML=none+"<small>dari "+n+" transaksi</small>";$("hOf").textContent=isAdib()?"Termasuk uang masuk yang belum kamu beri catatan.":"Ketuk satu per satu, pilih kantongnya, dan tulis untuk apa.";}
   else if(noNote){big.innerHTML=noNote+"<small>tanpa catatan</small>";$("hOf").textContent="Kantong sudah dipilih. Tinggal tulis untuk apa.";}
   else{big.textContent="Rapi ✓";$("hOf").textContent="Semua transaksi sudah dipilah dan diberi catatan.";}
   const pill=$("hPill");pill.className="pill "+(none||noNote?"warn":"ok");pill.textContent=none||noNote?"Perlu diisi":"Lengkap";
@@ -503,35 +510,46 @@ function renderAcct(c){
   for(const r of ["BRI","BCA"]){const a=c.acct[r];
     $("bal"+r).textContent=a.n?rp(a.last&&a.ok?a.last.saldoBank:a.est):"Belum ada data";
     const rec=$("rec"+r);
-    if(!a.n){rec.textContent=r==="BCA"?"Menunggu mutasi BCA Sep–Okt":"";rec.className="rec hint";}
+    if(!a.n){rec.textContent="Menunggu mutasi";rec.className="rec hint";}
     else if(a.last){rec.textContent=a.ok?"✓ Cocok dengan saldo bank "+dShort(a.last.tanggal):"Selisih "+rp(a.diff)+" dari saldo bank";rec.className="rec "+(a.ok?"ok":"bad");}
     else{rec.textContent="Perkiraan dari catatan manual";rec.className="rec hint";}
+    $("io"+r).innerHTML=a.n?'<span>Masuk <b>'+rpk(a.inn)+'</b></span><span>Keluar <b>'+rpk(a.out)+'</b></span>'+(a.start?'<span>Saldo awal <b>'+rpk(a.start)+'</b></span>':''):"";
   }
 }
-function renderPots(c){
-  const box=$("pots");box.innerHTML="";
-  for(const k of POTS){const p=c.pot[k];const sisa=p.in-p.out;
-    const d=el("div","pot"+(p.in?"":" wait"));d.style.setProperty("--c",COLOR(k));
-    const pct=p.in?Math.min(100,p.out/p.in*100):(p.out?100:0);
-    d.innerHTML='<div class="nm"><b>'+POS[k].lab+'</b><span>'+POS[k].rek+'</span></div>'+
-      '<div class="v'+(sisa<0?" neg":"")+'">'+rp(sisa)+'</div>'+
-      '<div class="pbar" role="img" aria-label="Terpakai '+Math.round(pct)+' persen"><i style="width:'+pct+'%"></i></div>'+
-      '<div class="mk"><span>Masuk <b>'+rpk(p.in)+'</b></span><span>Keluar <b>'+rpk(p.out)+'</b></span></div>'+
-      (k==="pribadi"&&p.outBRI?'<div class="s" style="color:var(--bad)">'+rp(p.outBRI)+' dibayar dari BRI</div>':"")+
-      (k!=="pribadi"&&p.outBCA?'<div class="s" style="color:var(--bad)">'+rp(p.outBCA)+' dibayar dari BCA</div>':"")+
-      (!p.in?'<div class="s">Belum ada transfer yang ditandai untuk kantong ini</div>':"");
-    box.appendChild(d);}
-  const extra=[];if(c.unIn)extra.push(rp(c.unIn)+" masuk belum ditandai Adib");if(c.unOut)extra.push(rp(c.unOut)+" keluar belum dipilah");
-  if(c.pot.bank.out)extra.push("biaya bank "+rp(c.pot.bank.out));
-  if(c.pot.lain.out||c.pot.lain.in)extra.push("lainnya: masuk "+rpk(c.pot.lain.in)+", keluar "+rpk(c.pot.lain.out));
-  $("potSub").textContent=extra.length?extra.join(" · "):"Masuk yang ditandai Adib − keluar yang dipilah";
+const REP_KEYS=[["rumah","Rumah NGT",""],["bonsari","Bonsari","upah & operasional"],["kebun","Kebun Wakaf",""]];
+function renderReport(){
+  const sel=$("repMonth"),cur=sel.value||"all";
+  const months=[...new Set(txs().filter(t=>t.rek==="BRI").map(t=>mKey(t.tanggal)))].sort().reverse();
+  sel.innerHTML='<option value="all">Semua bulan</option>'+months.map(m=>'<option value="'+m+'">'+mLabel(m)+'</option>').join("");
+  sel.value=[...sel.options].some(o=>o.value===cur)?cur:"all";
+  const inM=t=>sel.value==="all"||mKey(t.tanggal)===sel.value;
+  const bri=txs().filter(t=>t.rek==="BRI"&&t.arah==="keluar"&&inM(t));
+  const sum={};let un=0;
+  for(const t of bri){if(!t.alokasi||!t.alokasi.length){un+=total(t);continue;}t.alokasi.forEach(a=>sum[a.pos]=(sum[a.pos]||0)+a.jumlah);}
+  const tot=bri.reduce((s,t)=>s+total(t),0);
+  const masuk=txs().filter(t=>t.rek==="BRI"&&t.arah==="masuk"&&inM(t)).reduce((s,t)=>s+total(t),0);
+  const max=Math.max(1,...REP_KEYS.map(k=>sum[k[0]]||0),un);
+  const row=(k,lab,sub,v,minor)=>'<div class="rrow'+(minor?" minor":"")+'" style="--c:'+(k?COLOR(k):"var(--warn)")+'"><span class="nm"><i></i>'+lab+(sub?' <small>'+sub+'</small>':'')+'</span><span class="num">'+rp(v)+'</span>'+(minor?'':'<span class="bar"><span style="width:'+Math.max(v?2:0,v/max*100)+'%"></span></span>')+'</div>';
+  let h='<div class="tot"><span class="hint">Keluar dari BRI · '+(sel.value==="all"?"sejak dibuka 15 Sep":mLabel(sel.value))+'</span><b class="num">'+rp(tot)+'</b></div>';
+  h+=REP_KEYS.map(([k,l,sb])=>row(k,l,sb,sum[k]||0)).join("");
+  if(un)h+=row(null,"Belum dipilah","",un);
+  const minor=[];
+  if(sum.pribadi)minor.push(row("pribadi","Pribadi","tertukar rekening",sum.pribadi,true));
+  if(sum.lain)minor.push(row("lain","Lainnya","",sum.lain,true));
+  if(sum.pindah)minor.push(row("pindah","Pindah rekening","",sum.pindah,true));
+  if(sum.bank)minor.push(row("bank","Biaya bank","",sum.bank,true));
+  minor.push('<div class="rrow minor"><span class="nm">Masuk ke BRI di periode ini</span><span class="num">'+rp(masuk)+'</span></div>');
+  const bca=txs().filter(t=>t.rek==="BCA"&&t.arah==="keluar"&&inM(t));const bcaSw=bca.reduce((s,t)=>s+swapPart(t),0);
+  if(bcaSw)minor.push('<div class="rrow minor"><span class="nm">Rumah/Bonsari/Kebun dibayar dari BCA</span><span class="num" style="color:var(--bad)">'+rp(bcaSw)+'</span></div>');
+  h+='<div class="sub">'+minor.join("")+'</div>';
+  $("rep").innerHTML=h;
 }
 function renderSwap(c){
   const card=$("swapCard");const tot=c.swapBRI+c.swapBCA;
   if(!tot){card.hidden=true;return;}card.hidden=false;
   card.innerHTML='<div class="ttl"><b id="swapT">Tertukar rekening</b><span class="num">'+rp(tot)+'</span></div>'+
-   '<dl>'+(c.swapBRI?'<dt>Keperluan pribadi dibayar dari BRI</dt><dd>'+rp(c.swapBRI)+'</dd>':"")+(c.swapBCA?'<dt>Bonsari, kebun, atau rumah dibayar dari BCA</dt><dd>'+rp(c.swapBCA)+'</dd>':"")+'</dl>'+
-   '<div class="hint" style="color:var(--ink)">'+(c.swapBRI&&c.swapBCA?"Bisa saling ditutup: pindahkan selisihnya, lalu catat sebagai <b>Pindah rekening</b>.":c.swapBRI?"Ganti dengan memindahkan "+rp(c.swapBRI)+" dari BCA ke BRI, lalu catat sebagai <b>Pindah rekening</b>.":"Ganti dengan memindahkan "+rp(c.swapBCA)+" dari BRI ke BCA, lalu catat sebagai <b>Pindah rekening</b>.")+'</div>'+
+   '<dl>'+(c.swapBRI?'<dt>Keperluan pribadi dibayar dari BRI</dt><dd>'+rp(c.swapBRI)+'</dd>':"")+(c.swapBCA?'<dt>Rumah, Bonsari, atau Kebun dibayar dari BCA</dt><dd>'+rp(c.swapBCA)+'</dd>':"")+'</dl>'+
+   '<div class="hint" style="color:var(--ink)">Dihitung sejak 15 Sep 2026 (BRI dibuka). '+(c.swapBRI&&c.swapBCA?"Bisa saling ditutup: pindahkan selisihnya, lalu catat sebagai <b>Pindah rekening</b>.":c.swapBRI?"Ganti dengan memindahkan "+rp(c.swapBRI)+" dari BCA ke BRI, lalu catat sebagai <b>Pindah rekening</b>.":"Ganti dengan memindahkan "+rp(c.swapBCA)+" dari BRI ke BCA, lalu catat sebagai <b>Pindah rekening</b>.")+'</div>'+
    '<button class="linkbtn" type="button" id="seeSwap">Lihat '+c.swapRows.length+' transaksi →</button>';
   $("seeSwap").onclick=()=>{setView("swap");$("listSec").scrollIntoView({behavior:"smooth"});};
 }
@@ -569,14 +587,15 @@ function renderList(){
     const T=total(t),inn=t.arah==="masuk";
     let tags='<span class="tag t-rek">'+t.rek+'</span>';
     if(t.alokasi&&t.alokasi.length)t.alokasi.forEach(a=>tags+='<span class="tag t-'+a.pos+'"><i></i>'+POS[a.pos].lab+(t.alokasi.length>1?" "+rpk(a.jumlah):"")+'</span>');
-    else tags+='<span class="tag t-none">'+(inn?(isAdib()?"Tandai kantong":"Menunggu Adib"):"Belum dipilah")+'</span>';
+    else if(!inn)tags+='<span class="tag t-none">Belum dipilah</span>';
+    else if(!(t.ket||"").trim())tags+='<span class="tag t-none">'+(isAdib()?"Beri catatan":"Menunggu Adib")+'</span>';
     if(swapPart(t))tags+='<span class="tag t-swap">Tertukar</span>';
     if(needsNote(t))tags+='<span class="tag t-none">Belum ada catatan</span>';
     if(t.dikunci)tags+='<span class="tag t-lock">✓ Dicek Adib</span>';
     if(t.sumber==="manual")tags+='<span class="tag">Manual</span>';
     if((t.nota||[]).length)tags+='<span class="tag">📎 '+t.nota.length+'</span>';
     b.innerHTML='<span class="w">'+esc(titleOf(t))+'</span><span class="a num'+(inn?" in":"")+'">'+(inn?"+":"−")+fmt.format(T)+(t.biaya?'<small>termasuk biaya '+fmt.format(t.biaya)+'</small>':"")+'</span>'+
-      '<span class="m">'+(t.jam?'<span>'+esc(t.jam)+'</span>':"")+tags+'</span>'+((t.ket||"").trim()?'<span class="k">'+esc(t.ket)+'</span>':"");
+      '<span class="m">'+(t.jam?'<span>'+esc(t.jam)+'</span>':"")+tags+'</span>'+((t.ket||"").trim()?'<span class="k">'+esc(t.ket)+'</span>':"")+(t.catatanAdib&&!(t.ket||"").trim()?'<span class="k" style="background:var(--warn-soft)">Adib: '+esc(t.catatanAdib)+'</span>':"");
     b.onclick=()=>{if(openId===t.id){openId=null;draft=null;}else{openId=t.id;draft=null;}renderList();if(openId){const e=document.getElementById("ed-"+t.id);e&&e.scrollIntoView({block:"nearest",behavior:"smooth"});}};
     box.appendChild(b);
     if(t.id===openId)box.appendChild(editor(t));
@@ -594,20 +613,22 @@ function editor(t,isNew){
   const box=el("div","ed");box.id="ed-"+(t.id||"new");
   const inn=t.arah==="masuk";
   const lockedForMe=!isAdib()&&t.dikunci;
-  const canPos=isAdib()||(!inn&&!t.dikunci);
+  const canPos=!inn&&(isAdib()||!t.dikunci);
   if(!isNew){
     box.appendChild(el("div","raw",(t.sumber==="mutasi"?"Mutasi "+t.rek+" · ":"Dicatat manual · ")+dLong(t.tanggal)+(t.jam?" "+t.jam:"")+"\n"+(t.uraian||"")+(t.biaya?" · biaya "+fmt.format(t.biaya):"")+(t.saldoBank!=null?" · saldo "+fmt.format(t.saldoBank):"")));
   }
   const rule=el("div","rule");
-  rule.innerHTML=inn?(isAdib()?"<b>Transfer masuk.</b> Tandai uang ini untuk kantong mana (niat saat mengirim).":"<b>Transfer masuk</b> ditandai oleh Adib. Kamu bisa menambah catatan bila tahu asalnya."):
-    t.rek==="BRI"?"<b>BRI</b> dipakai untuk Bonsari, Kebun Wakaf, atau Rumah NGT.":"<b>BCA</b> dipakai untuk keperluan pribadi.";
+  rule.innerHTML=inn?(isAdib()?"<b>Uang masuk.</b> Tulis asal/untuk apa uang ini, lalu kunci.":"<b>Uang masuk</b> dicatat oleh Adib. Kalau belum ada catatan dan kamu tahu asalnya, tulis di bawah."):
+    t.rek==="BRI"?"<b>BRI</b> dipakai untuk Rumah NGT, Bonsari, atau Kebun Wakaf.":"<b>BCA</b> dipakai untuk keperluan pribadi.";
   box.appendChild(rule);
+  if(t.catatanAdib&&!isAdib()){const b=el("div","infobox");b.innerHTML="<b>Catatan Adib:</b> "+esc(t.catatanAdib);box.appendChild(b);}
   if(lockedForMe)box.appendChild(Object.assign(el("div","infobox"),{textContent:"Transaksi ini sudah dicek dan dikunci Adib. Hubungi Adib bila perlu diubah."}));
 
   // pilihan kantong
   const posWrap=el("div");
   const drawPos=()=>{
     posWrap.innerHTML="";
+    if(inn)return;
     if(!canPos){
       const s=el("div","hint");s.textContent=t.alokasi&&t.alokasi.length?"Kantong: "+t.alokasi.map(a=>POS[a.pos].lab+(t.alokasi.length>1?" "+rp(a.jumlah):"")).join(" + "):"Kantong: menunggu Adib";posWrap.appendChild(s);return;}
     const lab=el("div","hint");lab.style.fontWeight="700";lab.style.marginBottom="6px";lab.textContent=inn?"Uang ini untuk kantong apa?":"Untuk kantong apa?";posWrap.appendChild(lab);
@@ -656,7 +677,7 @@ function editor(t,isNew){
 
   // catatan
   const p0=draft.alokasi[0]&&POS[draft.alokasi[0].pos];
-  const lk=el("label","f");lk.textContent=inn?"Catatan (opsional)":"Untuk apa? (wajib)";
+  const lk=el("label","f");lk.textContent=inn?(isAdib()?"Asal / untuk apa uang ini":"Catatan (opsional)"):(t.rek==="BCA"&&draft.alokasi.length&&draft.alokasi.every(a=>a.pos==="pribadi")?"Untuk apa? (opsional untuk pribadi)":"Untuk apa? (wajib)");
   const ta=el("textarea");ta.maxLength=300;ta.rows=2;ta.value=draft.ket;ta.placeholder=inn?"mis. uang bulanan Oktober · hasil jual kopi":(p0&&p0.ph)||"mis. upah sortasi 3 orang · token listrik · pulsa";ta.disabled=lockedForMe;
   ta.oninput=()=>{draft.ket=ta.value;updateSave();};lk.appendChild(ta);box.appendChild(lk);
 
@@ -675,7 +696,7 @@ function editor(t,isNew){
   // khusus Adib
   let lockCb=null,adn=null;
   if(isAdib()&&!isNew){
-    const l=el("label","f");l.textContent="Catatan Adib (opsional)";adn=el("input");adn.maxLength=300;adn.value=draft.catatanAdib;adn.oninput=()=>{draft.catatanAdib=adn.value;updateSave();};l.appendChild(adn);box.appendChild(l);
+    const l=el("label","f");l.textContent="Catatan Adib (terlihat oleh Christo)";adn=el("input");adn.maxLength=300;adn.value=draft.catatanAdib;adn.oninput=()=>{draft.catatanAdib=adn.value;updateSave();};l.appendChild(adn);box.appendChild(l);
     const lr=el("label","lockrow");lockCb=el("input");lockCb.type="checkbox";lockCb.checked=draft.dikunci;lockCb.onchange=()=>{draft.dikunci=lockCb.checked;updateSave();};lr.append(lockCb,document.createTextNode(" Sudah dicek — kunci transaksi ini"));box.appendChild(lr);
   }else if(t.catatanAdib){box.appendChild(Object.assign(el("div","hint"),{textContent:"Catatan Adib: "+t.catatanAdib}));}
 
@@ -693,7 +714,7 @@ function editor(t,isNew){
     const sum=draft.alokasi.reduce((s,a)=>s+(a.jumlah||0),0);
     if(canPos&&!draft.alokasi.length)return inn?"Pilih kantongnya dulu.":"Pilih kantongnya dulu.";
     if(canPos&&sum!==T())return "Pembagian belum pas dengan "+rp(T())+".";
-    if(!inn&&!draft.ket.trim()&&!draft.alokasi.every(a=>a.pos==="bank"))return "Tulis untuk apa uang ini.";
+    if(!inn&&!draft.ket.trim()&&!noteOptional({rek:t.rek,alokasi:draft.alokasi}))return "Tulis untuk apa uang ini.";
     if(draft.alokasi.some(a=>a.pos==="lain")&&!draft.ket.trim())return "Untuk 'Lainnya', jelaskan di catatan.";
     return "";}
   function updateSave(){const v=valid();msg.textContent=v&&v!=="Terkunci"?v:"";msg.className="msg hint";save.disabled=!!v;}
@@ -745,30 +766,35 @@ function openAdd(){
 // ================================================================ rekap
 function renderRecap(){
   const months=[...new Set(txs().map(t=>mKey(t.tanggal)))].sort();
-  const keys=["bonsari","kebun","rumah","pribadi","bank","lain"];
-  const rows=months.map(m=>{const r={m,in:0,un:0,sw:0};keys.forEach(k=>r[k]=0);
-    txs().filter(t=>mKey(t.tanggal)===m).forEach(t=>{if(t.arah==="masuk"){r.in+=total(t);return;}
-      if(!t.alokasi||!t.alokasi.length){r.un+=total(t);return;}t.alokasi.forEach(a=>{if(a.pos in r)r[a.pos]+=a.jumlah;});r.sw+=swapPart(t);});return r;});
-  const max=Math.max(1,...rows.map(r=>keys.reduce((s,k)=>s+r[k],0)+r.un));
+  const keys=["rumah","bonsari","kebun"];
+  const rows=months.map(m=>{const r={m,inBRI:0,un:0,etc:0,pribBRI:0,bca:0};keys.forEach(k=>r[k]=0);
+    txs().filter(t=>mKey(t.tanggal)===m).forEach(t=>{
+      if(t.rek==="BCA"){if(t.arah==="keluar")r.bca+=total(t);return;}
+      if(t.arah==="masuk"){r.inBRI+=total(t);return;}
+      if(!t.alokasi||!t.alokasi.length){r.un+=total(t);return;}
+      t.alokasi.forEach(a=>{if(keys.includes(a.pos))r[a.pos]+=a.jumlah;else if(a.pos==="pribadi")r.pribBRI+=a.jumlah;else r.etc+=a.jumlah;});});return r;});
+  const max=Math.max(1,...rows.map(r=>keys.reduce((s,k)=>s+r[k],0)+r.un+r.etc+r.pribBRI));
   const mb=$("mbars");mb.innerHTML="";
   if(!rows.length){mb.innerHTML='<div class="hint">Belum ada data.</div>';}
-  rows.slice().reverse().forEach(r=>{const tot=keys.reduce((s,k)=>s+r[k],0)+r.un;
-    const d=el("div","mb");d.innerHTML='<div class="h"><b>'+mLabel(r.m)+'</b><span class="num">'+rp(tot)+'</span></div>';
+  rows.slice().reverse().forEach(r=>{const parts=[...keys.map(k=>[k,r[k]]),["pribadi",r.pribBRI],["lain",r.etc]];const tot=parts.reduce((s,p)=>s+p[1],0)+r.un;
+    const d=el("div","mb");d.innerHTML='<div class="h"><b>'+mLabel(r.m)+'</b><span class="num">BRI keluar '+rp(tot)+'</span></div>';
     const st=el("div","stack");st.style.width=Math.max(4,tot/max*100)+"%";
-    keys.forEach(k=>{if(r[k]){const i=el("i");i.style.width=(r[k]/tot*100)+"%";i.style.background=COLOR(k);i.title=POS[k].lab+" "+rp(r[k]);st.appendChild(i);}});
+    parts.forEach(([k,v])=>{if(v){const i=el("i");i.style.width=(v/tot*100)+"%";i.style.background=COLOR(k);i.title=POS[k].lab+" "+rp(v);st.appendChild(i);}});
     if(r.un){const i=el("i");i.style.width=(r.un/tot*100)+"%";i.style.background="repeating-linear-gradient(45deg,var(--line) 0 4px,transparent 4px 8px)";i.title="Belum dipilah "+rp(r.un);st.appendChild(i);}
     d.appendChild(st);mb.appendChild(d);});
-  $("mLegend").innerHTML=keys.map(k=>'<span style="--c:'+COLOR(k)+'">'+POS[k].lab+'</span>').join("")+'<span style="--c:var(--line)">Belum dipilah</span>';
-  const th='<thead><tr><th>Bulan</th><th>Masuk</th>'+keys.map(k=>'<th>'+POS[k].lab+'</th>').join("")+'<th>Belum dipilah</th><th>Tertukar</th></tr></thead>';
-  $("recapTbl").innerHTML=th+'<tbody>'+(rows.slice().reverse().map(r=>'<tr><td>'+BLN[+r.m.slice(5)-1]+' '+r.m.slice(2,4)+'</td><td>'+fmt.format(r.in)+'</td>'+keys.map(k=>'<td>'+(r[k]?fmt.format(r[k]):"–")+'</td>').join("")+'<td class="'+(r.un?"bad":"")+'">'+(r.un?fmt.format(r.un):"–")+'</td><td class="'+(r.sw?"bad":"")+'">'+(r.sw?fmt.format(r.sw):"–")+'</td></tr>').join("")||'<tr><td colspan="10">Belum ada data</td></tr>')+'</tbody>';
+  $("mLegend").innerHTML=keys.map(k=>'<span style="--c:'+COLOR(k)+'">'+POS[k].lab+'</span>').join("")+'<span style="--c:var(--pribadi)">Pribadi (tertukar)</span><span style="--c:var(--lain)">Lain-lain & biaya</span><span style="--c:var(--line)">Belum dipilah</span>';
+  const th='<thead><tr><th>Bulan</th><th>BRI masuk</th>'+keys.map(k=>'<th>'+POS[k].lab+'</th>').join("")+'<th>Pribadi dari BRI</th><th>Lain & biaya</th><th>Belum dipilah</th><th>BCA keluar</th></tr></thead>';
+  const f=v=>v?fmt.format(v):"–";
+  $("recapTbl").innerHTML=th+'<tbody>'+(rows.slice().reverse().map(r=>'<tr><td>'+BLN[+r.m.slice(5)-1]+' '+r.m.slice(2,4)+'</td><td>'+f(r.inBRI)+'</td>'+keys.map(k=>'<td>'+f(r[k])+'</td>').join("")+'<td class="'+(r.pribBRI?"bad":"")+'">'+f(r.pribBRI)+'</td><td>'+f(r.etc)+'</td><td class="'+(r.un?"bad":"")+'">'+f(r.un)+'</td><td>'+f(r.bca)+'</td></tr>').join("")||'<tr><td colspan="9">Belum ada data</td></tr>')+'</tbody>';
 }
 function waText(){
   const c=calc();const L=["*Kas Christo — "+dLong(todayISO())+"*",""];
-  L.push("Sisa per kantong:");POTS.forEach(k=>{const p=c.pot[k];L.push("• "+POS[k].lab+": "+rp(p.in-p.out)+" (masuk "+rp(p.in)+", keluar "+rp(p.out)+")");});
+  ["BRI","BCA"].forEach(r=>{const a=c.acct[r];if(a.n)L.push("• Saldo "+r+": "+rp(a.last&&a.ok?a.last.saldoBank:a.est));});
+  const sum={};let un=0;txs().filter(t=>t.rek==="BRI"&&t.arah==="keluar").forEach(t=>{if(!t.alokasi||!t.alokasi.length){un+=total(t);return;}t.alokasi.forEach(a=>sum[a.pos]=(sum[a.pos]||0)+a.jumlah);});
+  L.push("","Pemakaian BRI sejak 15 Sep:");REP_KEYS.forEach(([k,l])=>L.push("• "+l+": "+rp(sum[k]||0)));if(un)L.push("• Belum dipilah: "+rp(un));
   const todo=txs().filter(isTodo).length;L.push("");L.push(todo?"Masih perlu diisi: "+todo+" transaksi":"Semua transaksi sudah dipilah ✓");
   if(c.swapBRI)L.push("Pribadi dibayar dari BRI: "+rp(c.swapBRI));
-  if(c.swapBCA)L.push("Bonsari/kebun/rumah dibayar dari BCA: "+rp(c.swapBCA));
-  if(c.unIn)L.push("Transfer masuk belum ditandai Adib: "+rp(c.unIn));
+  if(c.swapBCA)L.push("Rumah/Bonsari/Kebun dibayar dari BCA: "+rp(c.swapBCA));
   return L.join("\n");
 }
 
@@ -822,6 +848,7 @@ async function login(){
 // ================================================================ events
 document.querySelectorAll(".seg button").forEach(b=>b.addEventListener("click",()=>setView(b.dataset.v)));
 ["fMonth","fRek","fPos"].forEach(id=>$(id).addEventListener("change",renderList));
+$("repMonth").addEventListener("change",renderReport);
 $("goPilah").onclick=()=>{setView("todo");$("listSec").scrollIntoView({behavior:"smooth"});};
 $("addBtn").onclick=openAdd;
 $("copyBtn").onclick=async()=>{const t=waText();try{await navigator.clipboard.writeText(t);$("copyMsg").textContent="Tersalin ✓";$("copyMsg").className="msg ok";}catch(_){const ta=el("textarea");ta.value=t;ta.rows=8;ta.readOnly=true;$("copyMsg").replaceChildren(ta);ta.select();}};
