@@ -877,6 +877,10 @@ $("expBtn").onclick=async()=>{try{const j=await call({op:"export"});const blob=n
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!$("viewer").hidden){$("viewer").hidden=true;$("viewer").innerHTML="";}});
 
 // ================================================================ boot
+// versi halaman: kalau HP masih memegang versi lama (cache), muat ulang sekali ke versi terbaru
+const PAGE_VERSION="2026-11-01c";
+(async()=>{try{const r=await fetch(location.pathname+"?cb="+Date.now(),{cache:"no-store"});const t=await r.text();const m=t.match(/PAGE_VERSION="([^"]+)"/);
+  if(m&&m[1]!==PAGE_VERSION){let done=null;try{done=sessionStorage.getItem("kcReload");}catch(_){}if(done!==m[1]){try{sessionStorage.setItem("kcReload",m[1]);}catch(_){}location.reload();}}}catch(_){}})();
 try{key=localStorage.getItem(KEY_STORE);}catch(_){}
 // kunci boleh datang lewat #k=… atau ?k=… (beberapa aplikasi chat membuang bagian setelah #)
 const keyFrom=s=>(String(s||"").match(/[#?&]k=([A-Za-z0-9_-]{20,})/)||String(s||"").match(/^\s*([A-Za-z0-9_-]{30,})\s*$/)||[])[1];
