@@ -18,7 +18,7 @@
   --accent:#2F6B4E; --accent-ink:#245A40; --accent-soft:#E2EFE6;
   --bonsari:#A8642A; --bonsari-soft:#F6E8DA; --kebun:#3E8657; --kebun-soft:#E1F0E5;
   --rumah:#2E7590; --rumah-soft:#DDEEF4; --pribadi:#8A5BA0; --pribadi-soft:#F0E6F5;
-  --adib:#4F5F86; --adib-soft:#E6EAF3; --pindah:#6B7280; --pindah-soft:#ECEDEF; --bank:#8A8F87; --bank-soft:#EEEFEC; --lain:#56657A; --lain-soft:#E6EAF0;
+  --on-rek:#FFFFFF; --bri:#1F5FAD; --bri-soft:#E4EEFA; --bca:#8A4FA3; --bca-soft:#F3E9F7; --adib:#4F5F86; --adib-soft:#E6EAF3; --pindah:#6B7280; --pindah-soft:#ECEDEF; --bank:#8A8F87; --bank-soft:#EEEFEC; --lain:#56657A; --lain-soft:#E6EAF0;
   --ok:#2E7A55; --ok-soft:#E1F1E8; --warn:#A5620E; --warn-soft:#FBEEDB; --bad:#B03A2E; --bad-soft:#F9E4E1;
   --f-ui:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
   --f-display:"Barlow Semi Condensed","Arial Narrow",system-ui,sans-serif;
@@ -33,7 +33,7 @@
   --accent:#7CC59C; --accent-ink:#9AD6B3; --accent-soft:#1E3328;
   --bonsari:#E0A16A; --bonsari-soft:#3A2A1C; --kebun:#7CC59C; --kebun-soft:#1E3328;
   --rumah:#6CB8D4; --rumah-soft:#173039; --pribadi:#C59BDB; --pribadi-soft:#33243D;
-  --adib:#A3B2D6; --adib-soft:#252B3A; --pindah:#AAB0B9; --pindah-soft:#262B31; --bank:#A9AEA6; --bank-soft:#262A25; --lain:#A6B4C8; --lain-soft:#242B35;
+  --on-rek:#0F1612; --bri:#7FB0EC; --bri-soft:#16263A; --bca:#CDA2E0; --bca-soft:#2C2035; --adib:#A3B2D6; --adib-soft:#252B3A; --pindah:#AAB0B9; --pindah-soft:#262B31; --bank:#A9AEA6; --bank-soft:#262A25; --lain:#A6B4C8; --lain-soft:#242B35;
   --ok:#7CC59C; --ok-soft:#183024; --warn:#E8B45A; --warn-soft:#3A2D17; --bad:#F0918A; --bad-soft:#3B1E1B;
   --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 28px -14px rgba(0,0,0,.6)}}
 :root[data-theme="dark"]{
@@ -43,7 +43,7 @@
   --accent:#7CC59C; --accent-ink:#9AD6B3; --accent-soft:#1E3328;
   --bonsari:#E0A16A; --bonsari-soft:#3A2A1C; --kebun:#7CC59C; --kebun-soft:#1E3328;
   --rumah:#6CB8D4; --rumah-soft:#173039; --pribadi:#C59BDB; --pribadi-soft:#33243D;
-  --adib:#A3B2D6; --adib-soft:#252B3A; --pindah:#AAB0B9; --pindah-soft:#262B31; --bank:#A9AEA6; --bank-soft:#262A25; --lain:#A6B4C8; --lain-soft:#242B35;
+  --on-rek:#0F1612; --bri:#7FB0EC; --bri-soft:#16263A; --bca:#CDA2E0; --bca-soft:#2C2035; --adib:#A3B2D6; --adib-soft:#252B3A; --pindah:#AAB0B9; --pindah-soft:#262B31; --bank:#A9AEA6; --bank-soft:#262A25; --lain:#A6B4C8; --lain-soft:#242B35;
   --ok:#7CC59C; --ok-soft:#183024; --warn:#E8B45A; --warn-soft:#3A2D17; --bad:#F0918A; --bad-soft:#3B1E1B;
   --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 28px -14px rgba(0,0,0,.6)}
 *{box-sizing:border-box}
@@ -182,6 +182,16 @@ header .sub{font-size:13px;color:var(--muted)}
 .tx .m{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:5px;align-items:center;font-size:12.5px;color:var(--muted)}
 .tx .k{grid-column:1/-1;font-size:13px;color:var(--ink);background:var(--soft);border-radius:8px;padding:6px 9px}
 .tx.open{background:var(--soft)}
+.tx.rek-BRI{box-shadow:inset 5px 0 0 var(--bri);background:color-mix(in srgb,var(--bri-soft) 55%,transparent)}
+.tx.rek-BCA{box-shadow:inset 5px 0 0 var(--bca);background:color-mix(in srgb,var(--bca-soft) 55%,transparent)}
+.tx.rek-BRI.open{background:var(--bri-soft)} .tx.rek-BCA.open{background:var(--bca-soft)}
+.ed.rek-BRI{box-shadow:inset 5px 0 0 var(--bri)} .ed.rek-BCA{box-shadow:inset 5px 0 0 var(--bca)}
+.tag.t-BRI{background:var(--bri);color:var(--on-rek)} .tag.t-BCA{background:var(--bca);color:var(--on-rek)}
+.acct.rek-BRI{border-top:5px solid var(--bri)} .acct.rek-BCA{border-top:5px solid var(--bca)}
+.acct.rek-BRI .bank b{color:var(--bri)} .acct.rek-BCA .bank b{color:var(--bca)}
+.reklegend{display:flex;gap:14px;font-size:12px;color:var(--muted);margin-top:8px;flex-wrap:wrap}
+.reklegend span{display:inline-flex;align-items:center;gap:6px}
+.reklegend i{width:12px;height:12px;border-radius:3px;display:inline-block}
 .empty{padding:26px 16px;text-align:center;color:var(--muted);font-size:14px}
 
 /* ---------- editor ---------- */
@@ -305,14 +315,14 @@ details.set .in{padding:0 16px 16px;display:flex;flex-direction:column;gap:12px}
   <section aria-labelledby="ruleT">
     <div class="sec-head"><h2 id="ruleT">Kantong BRI &amp; BCA</h2><span class="hint">Saldo menurut mutasi bank</span></div>
     <div class="rules">
-      <div class="acct">
+      <div class="acct rek-BRI">
         <div class="bank"><b>BRI</b><span class="tag t-rek">Ngantang</span></div>
         <div class="bal" id="balBRI">–</div>
         <div class="rec hint" id="recBRI"></div>
         <div class="io" id="ioBRI"></div>
         <div class="use">Untuk <b>Rumah NGT</b>, <b>Bonsari</b>, <b>Kebun Wakaf</b>, dan kebutuhan Adib saat di Ngantang, termasuk tarik tunai di ATM Ngantang.</div>
       </div>
-      <div class="acct">
+      <div class="acct rek-BCA">
         <div class="bank"><b>BCA</b><span class="tag t-rek">Pribadi</span></div>
         <div class="bal" id="balBCA">–</div>
         <div class="rec hint" id="recBCA"></div>
@@ -343,6 +353,7 @@ details.set .in{padding:0 16px 16px;display:flex;flex-direction:column;gap:12px}
       <select id="fRek" aria-label="Rekening"><option value="all">BRI + BCA</option><option value="BRI">BRI</option><option value="BCA">BCA</option></select>
       <select id="fPos" aria-label="Kantong"></select>
     </div>
+    <div class="reklegend" aria-hidden="true"><span><i style="background:var(--bri)"></i>BRI · Rumah, Bonsari, Kebun, Adib</span><span><i style="background:var(--bca)"></i>BCA · Pribadi</span></div>
     <div class="card list" id="addCard" hidden></div>
     <div class="card list" id="list"><div class="empty">Memuat…</div></div>
   </section>
@@ -461,7 +472,7 @@ function titleOf(t){
   if(/^Monthly Fee ATM/i.test(u))return "Biaya kartu ATM bulanan";
   if(/^Biaya SMS/i.test(u))return "Biaya SMS notifikasi";
   if(/^From MGR/i.test(u))return "Dana masuk · From MGR";
-  if(t.rek==="BCA"){const[k,...r]=u.split(" · ");return (r.join(" · ")||k).replace(/\s+/g," ").trim()||k;}
+  if(t.rek==="BCA"){const[k,...r]=u.split(" · ");const x=(r.join(" · ")||k).replace(/^TGL:\s*\d\d\/\d\d\s*/,"").replace(/\s+/g," ").trim();return x||k;}
   return u;
 }
 function partyOf(t){const s=titleOf(t).replace(/^(Transfer (ke|dari)|Top up DANA ·|QRIS ·)\s*/i,"").split(" · ")[0].trim().toLowerCase();return /tidak tercantum|^tarik tunai|^biaya|^setor/.test(s)?"":s;}
@@ -584,9 +595,9 @@ function renderList(){
   let lastD="";
   for(const t of rows){
     if(t.tanggal!==lastD){lastD=t.tanggal;box.appendChild(el("div","dayh",dLong(t.tanggal)));}
-    const b=el("button","tx"+(t.id===openId?" open":""));b.type="button";b.setAttribute("aria-expanded",String(t.id===openId));
+    const b=el("button","tx rek-"+t.rek+(t.id===openId?" open":""));b.type="button";b.setAttribute("aria-expanded",String(t.id===openId));
     const T=total(t),inn=t.arah==="masuk";
-    let tags='<span class="tag t-rek">'+t.rek+'</span>';
+    let tags='<span class="tag t-'+t.rek+'">'+t.rek+'</span>';
     if(t.alokasi&&t.alokasi.length)t.alokasi.forEach(a=>tags+='<span class="tag t-'+a.pos+'"><i></i>'+POS[a.pos].lab+(t.alokasi.length>1?" "+rpk(a.jumlah):"")+'</span>');
     else if(!inn)tags+='<span class="tag t-none">Belum dipilah</span>';
     else if(!(t.ket||"").trim())tags+='<span class="tag t-none">'+(t.dikunci?"Dari Adib":"Asal belum dicatat")+'</span>';
@@ -611,7 +622,7 @@ function freshDraft(t){
 function editor(t,isNew){
   if(!draft)draft=freshDraft(t);
   const T=()=>total(t);
-  const box=el("div","ed");box.id="ed-"+(t.id||"new");
+  const box=el("div","ed rek-"+t.rek);box.id="ed-"+(t.id||"new");
   const inn=t.arah==="masuk";
   const lockedForMe=!isAdib()&&t.dikunci;
   const canPos=!inn&&(isAdib()||!t.dikunci);
